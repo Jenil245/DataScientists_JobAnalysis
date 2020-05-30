@@ -72,9 +72,20 @@ def transform_data(temp):
     
     data['job_title'] = data['job_title'].apply(lambda x:'Scientist' if re.search('scientist|science|modeler|specialist', x.lower()) else x) 
     
-    print(data['job_title'].unique())
-    print(data['job_title'].nunique())
+    #job_desc
     
+    #size
+    '''
+    Categorizing company size into three parts large, medium, small.
+    '''
+    
+    data['Size'] = data['Size'].apply(lambda x: x.replace('employees','').replace('+','').replace('Unknown','1'))
+    
+    data['Size'] = data['Size'].apply(lambda x: x.split('to')[0]).astype(int).apply(lambda x: 'Small' if x < 200 else ('Medium' if x < 10000 else 'Large'))
+    
+   
+
+
 
 transform_data(data)
 
