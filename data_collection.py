@@ -12,6 +12,7 @@ from selenium import webdriver
 import psycopg2
 from sqlalchemy import create_engine
 
+#Let's Scrape data from Glassdoor website with selenium
 def get_data(num_jobs, url):
     
     '''Gathers jobs as a dataframe, scraped from Glassdoor'''
@@ -176,15 +177,7 @@ def get_data(num_jobs, url):
     return pd.DataFrame(jobs)  #This line converts the dictionary object into a pandas DataFrame.
 
 
-
-url = "https://www.glassdoor.co.in/Job/canada-data-scientist-jobs-SRCH_IL.0,6_IN3_KO7,21.htm?jobType=fulltime"
-
-df = get_data(800, url)
-
-# type casting
-df = df.astype({"Rating": float, "Founded": int, "Salary Estimate": object})
-
-
+#Let's Ingest data into PostgreSQL database
 def ingest_data(data):
     #make connection with PostgreSQL database
     conn = psycopg2.connect(host="localhost", database="job_info", user="postgres", password="admin")
@@ -201,4 +194,18 @@ def ingest_data(data):
     
     conn.close()
     
-ingest_data(df)
+    
+
+if __name__ == "__main__": 
+    
+    url = "https://www.glassdoor.co.in/Job/canada-data-scientist-jobs-SRCH_IL.0,6_IN3_KO7,21.htm?jobType=fulltime"
+     
+    #Scrape data from glassdoor website
+    df = get_data(800, url)
+
+    # type casting
+    df = df.astype({"Rating": float, "Founded": int, "Salary Estimate": object})
+    
+    #Ingest data into PostgreSQL database
+    ingest_data(df)
+    
