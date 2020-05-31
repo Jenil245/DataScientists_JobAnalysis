@@ -48,13 +48,13 @@ def transform_data(temp_data):
     such as Data Scientist, Data Analyst, Data Engineer, Research Scientist, ML engineer, Manager'''
     
     
-    data['job_title'] = data['job_title'].apply(lambda x:'Manager' if re.search('manager|director', x.lower())  else x) 
+    data['job_title'] = data['job_title'].apply(lambda x:'Director' if re.search('manager|director', x.lower())  else x) 
     
     data['job_title'] = data['job_title'].apply(lambda x:'Researcher' if re.search('research', x.lower()) else x) 
     
     data['job_title'] = data['job_title'].apply(lambda x:'Analyst' if re.search('analyst|analytics', x.lower()) else x) 
     
-    data['job_title'] = data['job_title'].apply(lambda x:'Machine Learning Eng' if re.search('machine', x.lower()) else x) 
+    data['job_title'] = data['job_title'].apply(lambda x:'MLE' if re.search('machine', x.lower()) else x) 
     
     data['job_title'] = data['job_title'].apply(
             lambda x:'Engineer' if re.search('engineer|architect|developer', x.lower()) else x)
