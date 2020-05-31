@@ -39,6 +39,10 @@ def transform_data(temp_data):
     
     data = temp_data.copy()
     
+    #Let's drop duplicate rows
+    data.drop_duplicates(inplace = True)
+    
+    
     #job_title 
     '''there are total 308 different job titles Because Companies often put 
     various senority level and keyword related to thier industry like 'environmental data scientist'
@@ -75,9 +79,6 @@ def transform_data(temp_data):
     ###R-language
     data['R'] = data['job_desc'].apply(
             lambda x:1 if re.search('r language|r-studio|r studio|r programming|statistical programming', x.lower()) else 0)
-    
-    ###SAS
-    data['SAS'] = data['job_desc'].apply(lambda x:1 if re.search('statistical software|statistical tool', x.lower()) else 0)
     
     ###scala
     data['Scala'] = data['job_desc'].apply(lambda x:1 if re.search('scala', x.lower()) else 0)
