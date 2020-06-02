@@ -95,7 +95,7 @@ def transform_data(temp_data):
     data['Excel'] = data['job_desc'].apply(lambda x:1 if re.search('excel|microsoft office', x.lower()) else 0)
     
     ###power_bi
-    data['Power_BI'] = data['job_desc'].apply(lambda x:1 if re.search('power bi|microsoft bi', x.lower()) else 0)
+    data['PowerBI'] = data['job_desc'].apply(lambda x:1 if re.search('power bi|microsoft bi', x.lower()) else 0)
     
     ###Tableau
     data['Tableau'] = data['job_desc'].apply(lambda x:1 if re.search('tableau', x.lower()) else 0)
@@ -103,8 +103,11 @@ def transform_data(temp_data):
     ###Tensorflow
     data['Tensorflow'] = data['job_desc'].apply(lambda x:1 if re.search('tensorflow', x.lower()) else 0)
     
-    ###pytorch
+    ###Pytorch
     data['Pytorch'] = data['job_desc'].apply(lambda x:1 if re.search('pytorch', x.lower()) else 0)
+    
+    ###Keras
+    data['Keras'] = data['job_desc'].apply(lambda x:1 if re.search('keras', x.lower()) else 0)
     
     #size
     '''
